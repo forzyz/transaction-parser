@@ -43,21 +43,14 @@
             <?php if (!empty($parsedData)): ?>
                 <?php foreach ($parsedData as $transaction): ?>
                     <tr>
-                        <?php foreach ($transaction as $key => $value): ?>
-                            <td>
-                                <?php if ($key === "Amount" && $value < 0): ?>
-                                    <span style="color: red">
-                                        <?= htmlspecialchars(formatToDollar($value)) ?>
-                                    </span>
-                                <?php elseif ($key === "Amount"): ?>
-                                    <span style="color: green">
-                                        <?= htmlspecialchars(formatToDollar($value)) ?>
-                                    </span>
-                                <?php else: ?>
-                                    <?= htmlspecialchars($value) ?>
-                                <?php endif; ?>
-                            </td>
-                        <?php endforeach; ?>
+                        <td><?= htmlspecialchars($transaction["Date"]) ?></td>
+                        <td><?= htmlspecialchars($transaction["Check #"]) ?></td>
+                        <td><?= htmlspecialchars($transaction["Description"]) ?></td>
+                        <td>
+                            <span style="color: <?= $transaction["Amount"] > 0 ? "green" : "red" ?>;">
+                                <?= htmlspecialchars(formatToDollar($transaction["Amount"])) ?>
+                            </span>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             <?php endif; ?>
